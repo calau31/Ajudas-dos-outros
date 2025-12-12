@@ -1,0 +1,68 @@
+#include <iostream>
+#include <string>
+#include <iomanip>  // importa setw para alinhar colunas
+using namespace std;
+int    matricula[10], qtd=0, opcao;
+string nome[10], curso[10];
+float notaFinal[10];
+void mostrarMenu(){
+		cout << "\n================== Menu =========================\n";
+        cout << "1. Cadastrar aluno\n";
+        cout << "2. Listar alunos cadastrados\n";
+        cout << "3. Sair do programa\n";
+        cout << "=================================================\n";
+        cout << "Escolha uma opcao: ";
+
+}
+void cadastrarAluno(){
+	cout << "\nDigite o numero de matricula: ";
+	cin >> matricula[qtd];
+
+    cin.ignore(); // Perminte-me o usar getline
+	
+	cout << "Digite o nome completo: ";
+    getline(cin, nome[qtd]); //usei getline para que possa dar espaço ou escreve o nome completo
+    cout << "Digite o curso: ";
+    getline(cin, curso[qtd]); //também usei getline porque a curso que possuem mais de um nome
+    cout << "Digite a nota final: ";
+    cin >> notaFinal[qtd];
+    qtd++;                   //adicionar na variavel quantidade
+    cout << "Aluno cadastrado com sucesso!\n";
+	
+}
+void lerCadastro(){
+	cout<<"\n============== Alunos Cadastrados ==============\n";
+	if(qtd==0){
+		cout<<"Nenhum aluno cadastrado \n";
+	}
+	else{
+		
+		cout << left << setw(17) << "Matricula" << setw(30) << "Nome Completo" << setw(25) << "Curso" << "Nota Final" << endl;
+		cout<<string(82,'*')<<endl;
+		for(int i=0; i<qtd; i++){
+			cout << left << setw(17) <<matricula[i] << setw(30) << nome[i] << setw(25) << curso[i] << notaFinal[i] << endl;
+		}
+		cout<<string(82,'*')<<endl;
+	}
+}
+int main() {
+
+    do {
+        mostrarMenu();
+        cin >> opcao;
+        
+		switch (opcao){
+			case 1:
+				cadastrarAluno(); break;
+			case 2:
+				lerCadastro(); break;
+			case 3:
+				cout<<"Saindo do programa... "; break;
+			default:
+				cout<<"Opcao invalida! \n"; break;
+		}
+
+    } while (opcao != 3);   // Se usuario escolher 3 o programa fecha
+
+    return 0;
+}
